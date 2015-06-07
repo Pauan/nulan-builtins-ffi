@@ -316,44 +316,6 @@ export const killAll = (actions) => {
 };
 
 // TODO verify that this works correctly in all situations
-// This can be implemented entirely in Nulan, but it's much more efficient to implement it in here
-export const sequential = (a) => (action) => {
-  const out = new Array(a["length"]);
-
-  let killed = false;
-
-  const loop = (i) => {
-    if (i < a["length"]) {
-      const onSuccess = (value) => {
-        // TODO is this necessary ?
-        if (!killed) {
-          // TODO is this necessary ?
-          action.onKilled = null;
-          out[i] = value;
-          loop(i + 1);
-        }
-      };
-
-      // TODO slightly inefficient
-      // TODO is this needed to prevent a memory leak of `t` ?
-      (function () {
-        const t = run(a[i], onSuccess, action.error);
-
-        action.onKilled = () => {
-          killed = true;
-          t.kill();
-        };
-      })();
-
-    } else {
-      action.success(out);
-    }
-  };
-
-  loop(0);
-};
-
-// TODO verify that this works correctly in all situations
 export const concurrent = (a) => (action) => {
   const out = new Array(a["length"]);
 

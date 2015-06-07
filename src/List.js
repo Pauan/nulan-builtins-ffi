@@ -10,10 +10,6 @@ export const array_copy = (array) => {
   return out;
 };
 
-export const list = (a) => {
-  return a;
-};
-
 // TODO test this
 export const list_slice = (array, start, end) => {
   var len = array["length"];
@@ -83,15 +79,15 @@ export const list_concat = (a) => {
 };
 
 // TODO test this
-export const nth_get = (array, index, yes, no) => {
+export const nth_get = (array, index, some, none) => {
   if (index < 0) {
     index += array["length"];
   }
 
   if (index >= 0 && index < array["length"]) {
-    return yes(array[index]);
+    return some(array[index]);
   } else {
-    return no();
+    return none;
   }
 };
 

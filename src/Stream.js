@@ -63,7 +63,7 @@ class Stream {
         // This cancels any pending peek/pull
         // This only happens if the buffer is empty
         for (let i = 0; i < pullers["length"]; ++i) {
-          pullers[i].action.success(this._none());
+          pullers[i].action.success(this._none);
         }
       }
 
@@ -109,7 +109,7 @@ class Stream {
   wait(action, push) {
     // Stream is closed
     if (this._pullers === null) {
-      action.success(this._none());
+      action.success(this._none);
 
     } else {
       const info = {
@@ -193,7 +193,7 @@ class Stream {
 
 export const some = (value) => [value];
 
-export const none = () => [];
+export const none = [];
 
 
 const DEFAULT_STREAM_LIMIT = 1;
