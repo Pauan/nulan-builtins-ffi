@@ -77,3 +77,17 @@ export const Unicode_to_String = (list) => {
 
   return s["join"]("");
 };
+
+
+
+export const _order = (x, y, less, equal, more) => {
+  if (x === y) {
+    return equal;
+  } else if (x < y) {
+    return less;
+  } else {
+    return more;
+  }
+};
+
+export const concat = (x, y, a) => x + y + a["join"]("");
